@@ -2,6 +2,7 @@
 using IdentityExample.ModelConfig;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdentityExample.Data
 {
@@ -16,6 +17,10 @@ namespace IdentityExample.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration<Product>(new ProductCFG());
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Name="admin",NormalizedName="ADMIN"},
+                new IdentityRole { Name="user",NormalizedName="USER"}
+                );
         }
     }
 }

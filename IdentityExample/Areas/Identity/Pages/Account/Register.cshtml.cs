@@ -121,8 +121,11 @@ namespace IdentityExample.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                //private user properties add here...
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
+                //Role added here..
+                await _userManager.AddToRoleAsync(user, "admin");
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
